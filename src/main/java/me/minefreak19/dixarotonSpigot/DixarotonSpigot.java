@@ -35,7 +35,8 @@ public final class DixarotonSpigot extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        this.discordClient.shutdown();
+        this.discordClient = null;
     }
 
     public JDA getDiscordClient() {
