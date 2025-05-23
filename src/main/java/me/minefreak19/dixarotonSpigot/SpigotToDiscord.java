@@ -3,18 +3,17 @@ package me.minefreak19.dixarotonSpigot;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+// TODO: Add a way for players to ping Discord users from minecraft (perhaps by linking Discord accounts and Minecraft usernames in some database?)
 public class SpigotToDiscord implements Listener {
-    private DixarotonSpigot plugin;
-    private TextChannel channel;
+    private final TextChannel channel;
 
     public SpigotToDiscord(DixarotonSpigot plugin) {
-        this.plugin = plugin;
-
-        this.channel = this.plugin.getDiscordClient().getChannelById(TextChannel.class, DixarotonSpigot.DISCORD_MC_CHANNEL_ID);
+        this.channel = plugin.getDiscordClient().getChannelById(TextChannel.class, DixarotonSpigot.DISCORD_MC_CHANNEL_ID);
         assert this.channel != null;
     }
 

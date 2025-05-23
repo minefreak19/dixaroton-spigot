@@ -12,6 +12,9 @@ public class DiscordToSpigot extends ListenerAdapter {
         this.spigotPlugin = spigotPlugin;
     }
 
+    // TODO: Handle images by adding a <attachment> or <image> to the message content
+    // TODO: Handle replies by adding "replied to..." to message content
+    // TODO: Make it so that if an online player's username is used in a message, they get a ping sound effect in-game
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
         if (event.getAuthor().getIdLong() == DixarotonSpigot.DISCORD_SELF_ID) return;
