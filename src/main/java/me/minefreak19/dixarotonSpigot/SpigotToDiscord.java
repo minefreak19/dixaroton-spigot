@@ -5,6 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 public class SpigotToDiscord implements Listener {
     private DixarotonSpigot plugin;
@@ -18,6 +19,7 @@ public class SpigotToDiscord implements Listener {
     }
 
     @EventHandler
+    // TODO: Add a way for the console to talk to discord
     public void onPlayerChat(AsyncPlayerChatEvent event) {
         String content = String.format("**<%s>** %s", event.getPlayer().getDisplayName(), event.getMessage());
         this.channel.sendMessage(content).queue();
@@ -26,6 +28,12 @@ public class SpigotToDiscord implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         var content = String.format("**%s**", event.getJoinMessage());
+        this.channel.sendMessage(removeColorCodes(content)).queue();
+    }
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        var content = String.format("**%s**", event.getQuitMessage());
         this.channel.sendMessage(removeColorCodes(content)).queue();
     }
 
