@@ -40,6 +40,7 @@ public final class DixarotonSpigot extends JavaPlugin {
     }
 
     public JDA getDiscordClient() {
+        assert this.discordClient != null;
         return this.discordClient;
     }
 }
