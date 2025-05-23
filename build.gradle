@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id("xyz.jpenilla.run-paper") version "2.3.1"
-//    id("com.github.johnrengelman.shadow") version "6.0.0"
+    // TODO: make the fat jar less fat (we only need JDA)
     id 'com.github.johnrengelman.shadow' version '7.1.2' // Check for latest version if needed
 }
 
@@ -58,12 +58,5 @@ processResources {
     filteringCharset 'UTF-8'
     filesMatching('plugin.yml') {
         expand props
-    }
-}
-
-jar {
-    from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-        setDuplicatesStrategy(DuplicatesStrategy.INCLUDE)
     }
 }
