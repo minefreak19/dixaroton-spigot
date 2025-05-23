@@ -37,6 +37,12 @@ public class SpigotToDiscord implements Listener {
         this.channel.sendMessage(removeColorCodes(content)).queue();
     }
 
+    @EventHandler
+    public void onPlayerDeath(PlayerDeathEvent event) {
+        var content = String.format("**%s**", event.getDeathMessage());
+        this.channel.sendMessage(removeColorCodes(content)).queue();
+    }
+
     private static String removeColorCodes(String s) {
         return s.replaceAll("(§.)", "");
     }
