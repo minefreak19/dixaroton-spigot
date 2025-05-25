@@ -7,6 +7,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.server.ServerCommandEvent;
 
 // TODO: Add a way for players to ping Discord users from minecraft (perhaps by linking Discord accounts and Minecraft usernames in some database?)
 public class SpigotToDiscord implements Listener {
@@ -15,6 +16,20 @@ public class SpigotToDiscord implements Listener {
     public SpigotToDiscord(DixarotonSpigot plugin) {
         this.channel = plugin.getDiscordClient().getChannelById(TextChannel.class, DixarotonSpigot.DISCORD_MC_CHANNEL_ID);
         assert this.channel != null;
+    }
+
+    @EventHandler
+    public void onServerCommand(ServerCommandEvent event) {
+        String command = event.getCommand();
+        String message;
+        if (command.startsWith("say")) {
+            message = command.substring(3).trim();
+        } else if (command.startsWith("/say")) {
+            message = command.substring(4).trim();
+        } else return;
+
+        String content = String.format("**[%s]** %s", event.getSender().getName(), message);
+        this.channel.sendMessage(content).queue();
     }
 
     @EventHandler
