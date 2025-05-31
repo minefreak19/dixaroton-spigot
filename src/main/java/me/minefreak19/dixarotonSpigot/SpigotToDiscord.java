@@ -33,7 +33,6 @@ public class SpigotToDiscord implements Listener {
     }
 
     @EventHandler
-    // TODO: Add a way for the console to talk to discord
     public void onPlayerChat(AsyncPlayerChatEvent event) {
         String content = String.format("**<%s>** %s", event.getPlayer().getDisplayName(), event.getMessage());
         this.channel.sendMessage(content).queue();
